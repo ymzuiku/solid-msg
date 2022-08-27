@@ -75,11 +75,7 @@ const options = {
   progress: true,
   clickCardClose: true,
   padding: "10px",
-  duration: {
-    info: 50000,
-    error: 50000,
-    success: 50000,
-  },
+  duration: 10000,
   css: {
     error: tw`relative overflow-hidden w-full inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
     success: tw`relative overflow-hidden w-full inline-block bg-indigo-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
@@ -126,7 +122,7 @@ const createId = () => {
   return String(Math.random());
 };
 
-const showMsg = (type: MsgType, msg: any, duration = options.duration.info) => {
+const showMsg = (type: MsgType, msg: any, duration = options.duration) => {
   createMessage();
   const id = createId();
   setStore("list", [...store.list, { msg, type, id, duration }]);
@@ -142,16 +138,16 @@ export const solidMsg = {
     setStore("show", false);
     setStore("show", true);
   },
-  error: (msg: any, duration = options.duration.error) => {
+  error: (msg: any, duration = options.duration) => {
     showMsg("error", msg, duration);
   },
-  success: (msg: any, duration = options.duration.success) => {
+  success: (msg: any, duration = options.duration) => {
     showMsg("success", msg, duration);
   },
-  light: (msg: any, duration = options.duration.info) => {
+  light: (msg: any, duration = options.duration) => {
     showMsg("light", msg, duration);
   },
-  dark: (msg: any, duration = options.duration.info) => {
+  dark: (msg: any, duration = options.duration) => {
     showMsg("dark", msg, duration);
   },
 };

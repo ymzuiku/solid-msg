@@ -28,6 +28,9 @@ In Solid project:
 import { solidMsg } from "solid-msg";
 
 solidMsg.light("hello solid-msg")
+
+// change duration
+solidMsg.dark("hello solid-msg", 5000)
 ```
 
 # Change options
@@ -35,15 +38,15 @@ solidMsg.light("hello solid-msg")
 ```tsx
 import { solidMsg } from "solid-msg";
 
- solidMsg.setOptions({
-  positon:"center",
+solidMsg.setOptions({
+  positon:"top",
   clickCardClose: true,
   closeButton: false,
-  progress: false,
-  width: "500px",
-  padding: "20px",
+  progress: true,
+  width: "300px",
+  padding: "10px",
+  duration: 10000,
 });
-solidMsg.light("hello solid-msg")
 ```
 
 # Custom message content

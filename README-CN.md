@@ -4,13 +4,13 @@ A solid message UI component.
 
 [View DEMO](https://solid-msg.gewulian.com)
 
-Features:
+特性:
 
-- Use [twind](https://github.com/tw-in-js/twind)
-- Progress bar
-- Easy use 
-- Easy custom
-- Tiny, only `1.5kb` in gzip
+- 使用 [twind](https://github.com/tw-in-js/twind) 处理 css
+- 进度条 bar
+- 易于使用
+- 易于定制
+- 轻量, 仅 `1.5kb` in gzip
 
 # 快速开始
 
@@ -26,6 +26,8 @@ pnpm i "solid-msg"
 import { solidMsg } from "solid-msg";
 
 solidMsg.light("hello solid-msg")
+// change duration
+solidMsg.dark("hello solid-msg", 5000)
 ```
 
 # 调整配置
@@ -33,15 +35,15 @@ solidMsg.light("hello solid-msg")
 ```tsx
 import { solidMsg } from "solid-msg";
 
- solidMsg.setOptions({
-  positon:"center",
+solidMsg.setOptions({
+  positon:"top",
   clickCardClose: true,
   closeButton: false,
-  progress: false,
-  width: "500px",
-  padding: "20px",
+  progress: true,
+  width: "300px",
+  padding: "10px",
+  duration: 10000,
 });
-solidMsg.light("hello solid-msg")
 ```
 
 # 自定义消息内容
