@@ -80,6 +80,7 @@ const options = {
   progress: true,
   clickCardClose: true,
   padding: "10px",
+  zIndex: "1000",
   duration: 10000,
   css: {
     red: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
@@ -189,7 +190,7 @@ export function Message() {
       {() => (
         <div
           class={positions[options.position]}
-          style={{ width: options.width }}
+          style={{ width: options.width, "z-index": options.zIndex }}
         >
           <For each={store.list}>
             {(item) => {
