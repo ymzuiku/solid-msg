@@ -117,17 +117,24 @@ const App = () => {
         </Button>
         <Button
           onclick={() => {
-            solidMsg.success(getMsg());
+            solidMsg.blue(getMsg());
           }}
         >
-          Show success
+          Show blue
         </Button>
         <Button
           onclick={() => {
-            solidMsg.error(getMsg());
+            solidMsg.red(getMsg());
           }}
         >
-          Show error
+          Show red
+        </Button>
+        <Button
+          onclick={() => {
+            solidMsg.green(getMsg());
+          }}
+        >
+          Show green
         </Button>
       </div>
     </div>

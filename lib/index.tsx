@@ -13,13 +13,14 @@ const closeSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><path d="M18 6 6 18M6 6l12 12"></path></svg>
 `;
 
-type MsgType = "light" | "error" | "success" | "dark";
+type MsgType = "light" | "dark" | "red" | "blue" | "green";
 type PositionType = "top" | "center" | "bottom";
 
 const MsgComponent: Component<{
   id: string;
   msg: any;
   type: MsgType;
+  pending?: boolean;
   duration: number;
 }> = (p) => {
   const [getLen, setLen] = createSignal(p.duration);
@@ -32,36 +33,42 @@ const MsgComponent: Component<{
   return (
     <div
       class={options.css[p.type]}
-      classList={{ [tw`cursor-pointer`]: options.clickCardClose }}
-      style={{ padding: options.padding }}
+      classList={{
+        [tw`cursor-pointer`]: options.clickCardClose,
+        [tw`h-0 max-h-0 opacity-0 mt-0`]: p.pending,
+        [tw`mt-4`]: !p.pending,
+      }}
+      style={{ padding: !p.pending ? options.padding : "0px" }}
       onclick={() => {
         if (options.clickCardClose) {
           closeItem(p.id);
         }
       }}
     >
-      {options.progress && (
-        <div
-          class={[
-            tw`absolute w-full left-0 bottom-0 rounded h-[3px]`,
-            options.progresCss[p.type],
-          ].join(" ")}
-          style={{
-            transform: `scaleX(${getLen() / p.duration})`,
-            "transform-origin": "0% 0%",
-          }}
-        />
-      )}
-      <p class={tw`flex-1 break-words whitespace-normal overflow-hidden`}>
-        {p.msg}
-      </p>
-      {options.closeButton && (
-        <div
-          class={tw`ml-2 w-6 h-6 opacity-70 flex-grow-0 cursor-pointer`}
-          innerHTML={closeSvg}
-          onclick={() => closeItem(p.id)}
-        ></div>
-      )}
+      <Show when={!p.pending}>
+        {options.progress && (
+          <div
+            class={[
+              tw`absolute w-full left-0 bottom-0 rounded h-[3px]`,
+              options.progresCss[p.type],
+            ].join(" ")}
+            style={{
+              transform: `scaleX(${getLen() / p.duration})`,
+              "transform-origin": "0% 0%",
+            }}
+          />
+        )}
+        <p class={tw`flex-1 break-words whitespace-normal overflow-hidden`}>
+          {p.msg}
+        </p>
+        {options.closeButton && (
+          <div
+            class={tw`ml-2 w-6 h-6 opacity-70 flex-grow-0 cursor-pointer`}
+            innerHTML={closeSvg}
+            onclick={() => closeItem(p.id)}
+          ></div>
+        )}
+      </Show>
     </div>
   );
 };
@@ -75,16 +82,18 @@ const options = {
   padding: "10px",
   duration: 10000,
   css: {
-    error: tw`relative overflow-hidden w-full inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
-    success: tw`relative overflow-hidden w-full inline-block bg-indigo-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
-    light: tw`relative overflow-hidden w-full inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
-    dark: tw`relative overflow-hidden w-full inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    red: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    blue: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-indigo-500 dark:bg-black text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    green: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-green-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    light: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
+    dark: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
   },
   progresCss: {
     light: tw`bg-black opacity-20`,
     dark: tw`bg-white opacity-20`,
-    success: tw`bg-indigo-800`,
-    error: tw`bg-red-800`,
+    blue: tw`bg-indigo-800`,
+    red: tw`bg-red-800`,
+    green: tw`bg-green-800`,
   },
   Component: MsgComponent,
 };
@@ -104,7 +113,13 @@ const createMessage = () => {
 const [store, setStore] = createRoot(() => {
   return createStore<{
     show: boolean;
-    list: { msg: any; type: MsgType; id: string; duration: number }[];
+    list: {
+      msg: any;
+      type: MsgType;
+      id: string;
+      duration: number;
+      pending?: boolean;
+    }[];
   }>({
     show: true,
     list: [],
@@ -112,14 +127,17 @@ const [store, setStore] = createRoot(() => {
 });
 
 const closeItem = (id: string) => {
-  const list = [];
-  for (let i = 0; i < store.list.length; i++) {
-    const item = store.list[i];
-    if (item.id !== id) {
-      list.push(item);
+  setStore("list", (v) => v.id == id, { pending: true });
+  setTimeout(() => {
+    const list = [];
+    for (let i = 0; i < store.list.length; i++) {
+      const item = store.list[i];
+      if (item.id !== id) {
+        list.push(item);
+      }
     }
-  }
-  setStore("list", list);
+    setStore("list", list);
+  }, 310);
 };
 
 const createId = () => {
@@ -142,11 +160,14 @@ export const solidMsg = {
     setStore("show", false);
     setStore("show", true);
   },
-  error: (msg: any, duration = options.duration) => {
-    showMsg("error", msg, duration);
+  red: (msg: any, duration = options.duration) => {
+    showMsg("red", msg, duration);
   },
-  success: (msg: any, duration = options.duration) => {
-    showMsg("success", msg, duration);
+  blue: (msg: any, duration = options.duration) => {
+    showMsg("blue", msg, duration);
+  },
+  green: (msg: any, duration = options.duration) => {
+    showMsg("green", msg, duration);
   },
   light: (msg: any, duration = options.duration) => {
     showMsg("light", msg, duration);
@@ -157,9 +178,9 @@ export const solidMsg = {
 };
 
 const positions = {
-  top: tw`fixed mx-auto top-10 left-1/2 -translate-x-1/2 space-y-4`,
-  center: tw`fixed mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 space-y-4`,
-  bottom: tw`fixed mx-auto bottom-10 left-1/2 -translate-x-1/2 space-y-4`,
+  top: tw`fixed mx-auto top-10 left-1/2 -translate-x-1/2`,
+  center: tw`fixed mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
+  bottom: tw`fixed mx-auto bottom-10 left-1/2 -translate-x-1/2`,
 };
 
 export function Message() {
