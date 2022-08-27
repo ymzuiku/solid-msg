@@ -46,6 +46,14 @@ solidMsg.setOptions({
   width: "300px",
   padding: "10px",
   duration: 10000,
+  css: {
+    blue: "custon-blue-card",
+    ...solidMsg.options,
+  },
+  progressCss: {
+    blue: "custon-blue-progress",
+    ...solidMsg.options,
+  }
 });
 ```
 
