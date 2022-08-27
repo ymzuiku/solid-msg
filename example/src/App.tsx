@@ -9,7 +9,7 @@ import LogoSvg from "./logo.svg";
 const Button: Component<{ onclick?: any; children: JSX.Element }> = (p) => {
   return (
     <button
-      class={tw`bg-red-500 text-white p-2 rounded-lg shadow focus:outline-none outline-none`}
+      class={tw`bg-red-500 text-white p-2 flex-grow-0 rounded-lg shadow focus:outline-none outline-none`}
       onclick={p.onclick}
     >
       {p.children}
@@ -21,14 +21,17 @@ const App = () => {
   const [getMsg, setMsg] = createSignal("Input Message");
   const [pos, setPos] = createSignal(solidMsg.options.position);
   return (
-    <div class={tw`h-screen w-screen flex flex-col bg-gray-900`}>
+    <div
+      class={tw`h-screen w-screen flex flex-col bg-gray-900 overflow-hidden`}
+    >
       <div class={tw`flex-1 flex flex-col items-center justify-center`}>
         <Dynamic component={LogoSvg} class={tw`w-60 h-60`} />
+        <h1 class={tw`text-white opacity-50`}>Solid Msg</h1>
       </div>
-      <div class={tw`px-20 pb-4 space-y-4`}>
-        <div class="flex flex-row space-x-4">
+      <div class={tw`px-4 sm:px-20 pb-4 space-y-4 w-full`}>
+        <div class="w-full flex flex-col sm:flex-row space-y-4 sm:space-x-4 flex-wrap">
           <select
-            class={tw`px-20 pb-4 bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
+            class={tw`pb-4 bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
             value={pos()}
             onChange={(e) => {
               const v = e.currentTarget.value as any;
@@ -43,7 +46,7 @@ const App = () => {
             <option value="bottom">position: Bottom</option>
           </select>
           <select
-            class={tw`px-20 pb-4 bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
+            class={tw`bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
             onChange={(e) => {
               const v = e.currentTarget.value as any;
               if (v == "1") {
@@ -63,7 +66,7 @@ const App = () => {
             <option value="2">Close button: show</option>
           </select>
           <select
-            class={tw`px-20 pb-4 bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
+            class={tw`bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
             onChange={(e) => {
               const v = e.currentTarget.value as any;
               if (v == "1") {
@@ -95,7 +98,7 @@ const App = () => {
           />
         </form>
       </div>
-      <div class={tw`p-20 pt-0 flex flex-row space-x-4`}>
+      <div class={tw`p-4 sm:p-20 pt-0 flex flex-row space-x-4`}>
         <Button
           onclick={() => {
             solidMsg.light(getMsg());
