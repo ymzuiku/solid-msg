@@ -44,9 +44,7 @@ const MsgComponent: Component<{
         <div
           class={[
             tw`absolute w-full left-0 bottom-0 rounded h-[3px]`,
-            p.type === "dark"
-              ? tw`bg-white opacity-20`
-              : tw`bg-black opacity-20`,
+            options.progresCss[p.type],
           ].join(" ")}
           style={{
             transform: `scaleX(${getLen() / p.duration})`,
@@ -81,6 +79,12 @@ const options = {
     success: tw`relative overflow-hidden w-full inline-block bg-indigo-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
     light: tw`relative overflow-hidden w-full inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
     dark: tw`relative overflow-hidden w-full inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+  },
+  progresCss: {
+    light: tw`bg-black opacity-20`,
+    dark: tw`bg-white opacity-20`,
+    success: tw`bg-indigo-800`,
+    error: tw`bg-red-800`,
   },
   Component: MsgComponent,
 };
