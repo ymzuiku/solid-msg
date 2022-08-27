@@ -10,7 +10,7 @@ A solid message UI component.
 - 进度条 bar
 - 易于使用
 - 易于定制
-- 轻量, 仅 `1.5kb` in gzip
+- 轻量, 仅 `2kb` in gzip
 
 # 快速开始
 

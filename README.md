@@ -12,7 +12,7 @@ Features:
 - Progress bar
 - Easy use 
 - Easy custom
-- Tiny, only `1.5kb` in gzip
+- Tiny, only `2kb` in gzip
 
 # Quick start
 
