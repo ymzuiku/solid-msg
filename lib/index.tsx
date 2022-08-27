@@ -33,6 +33,7 @@ const MsgComponent: Component<{
     <div
       class={options.css[p.type]}
       classList={{ [tw`cursor-pointer`]: options.clickCardClose }}
+      style={{ padding: options.padding }}
       onclick={() => {
         if (options.clickCardClose) {
           closeItem(p.id);
@@ -73,16 +74,17 @@ const options = {
   width: "300px",
   progress: true,
   clickCardClose: true,
+  padding: "10px",
   duration: {
     info: 50000,
     error: 50000,
     success: 50000,
   },
   css: {
-    error: tw`relative overflow-hidden w-full inline-block p-2 bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
-    success: tw`relative overflow-hidden w-full p-2 inline-block bg-indigo-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
-    light: tw`relative overflow-hidden w-full p-2 inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
-    dark: tw`relative overflow-hidden w-full p-2 inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    error: tw`relative overflow-hidden w-full inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    success: tw`relative overflow-hidden w-full inline-block bg-indigo-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    light: tw`relative overflow-hidden w-full inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
+    dark: tw`relative overflow-hidden w-full inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
   },
   Component: MsgComponent,
 };

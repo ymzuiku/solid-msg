@@ -18,7 +18,8 @@ const Button: Component<{ onclick?: any; children: JSX.Element }> = (p) => {
 };
 
 const App = () => {
-  const [getMsg, setMsg] = createSignal("Input Message");
+  const [msg, setMsg] = createSignal("");
+  const getMsg = () => msg() || "Please input message";
   const [pos, setPos] = createSignal(solidMsg.options.position);
   return (
     <div
@@ -91,9 +92,9 @@ const App = () => {
           }}
         >
           <input
-            placeholder="About message"
+            placeholder="Input about message"
             class={tw`w-full bg-gray-500 bg-opacity-10 p-2 rounded focus:outline-none text-white`}
-            value={getMsg()}
+            value={msg()}
             oninput={(e) => setMsg(e.currentTarget.value)}
           />
         </form>

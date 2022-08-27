@@ -41,6 +41,7 @@ import { solidMsg } from "solid-msg";
   closeButton: false,
   progress: false,
   width: "500px",
+  padding: "20px",
 });
 solidMsg.light("hello solid-msg")
 ```

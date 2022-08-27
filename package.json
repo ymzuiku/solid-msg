@@ -1,6 +1,6 @@
 {
   "name": "solid-msg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "solid msg UI component",
   "main": "cjs/index.js",
   "types": "lib/index.tsx",
@@ -13,9 +13,7 @@
     "./base.css": "./base.css"
   },
   "scripts": {
-    "ts": "node build.js",
-    "css": "npx tailwindcss -i ./lib/index.css -o ./base.css --minify",
-    "build": "npm run ts && npm run css"
+    "build": "node build.js"
   },
   "license": "MIT",
   "devDependencies": {
