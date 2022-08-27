@@ -4,6 +4,7 @@ import { Component, createSignal, JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { solidMsg } from "solid-msg";
 import { tw } from "twind";
+import GithubSvg from "./github.svg";
 import LogoSvg from "./logo.svg";
 
 const Button: Component<{ onclick?: any; children: JSX.Element }> = (p) => {
@@ -28,6 +29,13 @@ const App = () => {
       <div class={tw`flex-1 flex flex-col items-center justify-center`}>
         <Dynamic component={LogoSvg} class={tw`w-60 h-60`} />
         <h1 class={tw`text-white opacity-50`}>Solid Msg</h1>
+        <a
+          class={tw`text-white w-10 h-10 fixed top-10 right-10`}
+          target="_blank"
+          href="https://github.com/ymzuiku/solid-msg"
+        >
+          <Dynamic component={GithubSvg} />
+        </a>
       </div>
       <div class={tw`px-4 sm:px-20 pb-4 space-y-4 w-full`}>
         <div class="w-full flex flex-col sm:flex-row space-y-4 sm:space-x-4 flex-wrap">
