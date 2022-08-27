@@ -1,0 +1,43 @@
+{
+  "name": "solid-msg",
+  "version": "0.1.0",
+  "description": "solid msg UI component",
+  "main": "cjs/index.js",
+  "types": "lib/index.tsx",
+  "private": false,
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js"
+    },
+    "./base.css": "./base.css"
+  },
+  "scripts": {
+    "ts": "node build.js",
+    "css": "npx tailwindcss -i ./lib/index.css -o ./base.css --minify",
+    "build": "npm run ts && npm run css"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^2.0.1",
+    "esbuild-plugin-solid": "^0.4.2",
+    "tailwindcss": "^3.1.8",
+    "terser": "^5.15.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.9",
+    "vite-plugin-solid": "^2.3.0",
+    "vite-plugin-solid-svg": "^0.4.1"
+  },
+  "dependencies": {
+    "solid-js": "^1.5.1",
+    "twind": "^0.16.17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ymzuiku/solid-msg.git"
+  },
+  "bugs": {
+    "url": "git+https://github.com/ymzuiku/solid-msg.git"
+  },
+  "homepage": "git+https://github.com/ymzuiku/solid-msg.git"
+}

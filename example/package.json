@@ -1,0 +1,27 @@
+{
+  "name": "solid-msg",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^2.0.1",
+    "autoprefixer": "^10.4.8",
+    "postcss": "^8.4.16",
+    "terser": "^5.15.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.9",
+    "vite-plugin-solid": "^2.3.0",
+    "vite-plugin-solid-svg": "^0.4.1"
+  },
+  "dependencies": {
+    "solid-js": "^1.5.1",
+    "solid-msg": "link:../solid-msg",
+    "twind": "^0.16.17"
+  }
+}
