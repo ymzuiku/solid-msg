@@ -1,6 +1,6 @@
 {
   "name": "solid-msg",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "solid msg UI component",
   "main": "cjs/index.js",
   "types": "lib/index.tsx",

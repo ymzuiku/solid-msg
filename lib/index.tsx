@@ -38,7 +38,7 @@ const MsgComponent: Component<{
         [tw`cursor-pointer`]: options.clickCardClose,
         [tw`h-0 max-h-0 opacity-0 mt-0`]: p.removing,
         [tw`mb-4`]: !p.removing,
-        [tw`translate-y-12 translate-x-0`]: p.appending,
+        [tw`translate-y-12 translate-x-0 opacity-0`]: p.appending,
       }}
       style={{ padding: !p.removing ? options.padding : "0px" }}
       onclick={() => {
