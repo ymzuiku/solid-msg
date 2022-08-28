@@ -20,7 +20,8 @@ const MsgComponent: Component<{
   id: string;
   msg: any;
   type: MsgType;
-  pending?: boolean;
+  appending?: boolean;
+  removing?: boolean;
   duration: number;
 }> = (p) => {
   const [getLen, setLen] = createSignal(p.duration);
@@ -35,17 +36,18 @@ const MsgComponent: Component<{
       class={options.css[p.type]}
       classList={{
         [tw`cursor-pointer`]: options.clickCardClose,
-        [tw`h-0 max-h-0 opacity-0 mt-0`]: p.pending,
-        [tw`mt-4`]: !p.pending,
+        [tw`h-0 max-h-0 opacity-0 mt-0`]: p.removing,
+        [tw`mb-4`]: !p.removing,
+        [tw`translate-y-12 translate-x-0`]: p.appending,
       }}
-      style={{ padding: !p.pending ? options.padding : "0px" }}
+      style={{ padding: !p.removing ? options.padding : "0px" }}
       onclick={() => {
         if (options.clickCardClose) {
           closeItem(p.id);
         }
       }}
     >
-      <Show when={!p.pending}>
+      <Show when={!p.removing}>
         {options.progress && (
           <div
             class={[
@@ -83,11 +85,11 @@ const options = {
   zIndex: "2000",
   duration: 10000,
   css: {
-    red: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
-    blue: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-indigo-500 dark:bg-black text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
-    green: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-green-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
-    light: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
-    dark: tw`relative transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    red: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    blue: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-indigo-500 dark:bg-black text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    green: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-green-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    light: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
+    dark: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
   },
   progresCss: {
     light: tw`bg-black opacity-20`,
@@ -119,7 +121,8 @@ const [store, setStore] = createRoot(() => {
       type: MsgType;
       id: string;
       duration: number;
-      pending?: boolean;
+      removing?: boolean;
+      appending?: boolean;
     }[];
   }>({
     show: true,
@@ -128,7 +131,7 @@ const [store, setStore] = createRoot(() => {
 });
 
 const closeItem = (id: string) => {
-  setStore("list", (v) => v.id == id, { pending: true });
+  setStore("list", (v) => v.id == id, { removing: true });
   setTimeout(() => {
     const list = [];
     for (let i = 0; i < store.list.length; i++) {
@@ -148,7 +151,14 @@ const createId = () => {
 const showMsg = (type: MsgType, msg: any, duration = options.duration) => {
   createMessage();
   const id = createId();
-  setStore("list", [...store.list, { msg, type, id, duration }]);
+  setStore("list", [
+    ...store.list,
+    { msg, type, id, duration, appending: true },
+  ]);
+  requestAnimationFrame(() => {
+    setStore("list", (v) => v.id === id, { appending: false });
+  });
+
   setTimeout(() => {
     closeItem(id);
   }, duration);
