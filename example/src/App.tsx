@@ -19,8 +19,9 @@ const Button: Component<{ onclick?: any; children: JSX.Element }> = (p) => {
 };
 
 const App = () => {
-  const [msg, setMsg] = createSignal("");
-  const getMsg = () => msg() || "Please input message";
+  const [$msg, setMsg] = createSignal("");
+  const [$duration, setDuration] = createSignal(solidMsg.options.duration + "");
+  const getMsg = () => $msg() || "Please input message";
   const [pos, setPos] = createSignal(solidMsg.options.position);
   return (
     <div
@@ -102,8 +103,20 @@ const App = () => {
           <input
             placeholder="Input about message"
             class={tw`w-full bg-gray-500 bg-opacity-10 p-2 rounded focus:outline-none text-white`}
-            value={msg()}
+            value={$msg()}
             oninput={(e) => setMsg(e.currentTarget.value)}
+          />
+          <input
+            placeholder="Change all duration"
+            class={tw`mt-4 w-full bg-gray-500 bg-opacity-10 p-2 rounded focus:outline-none text-white`}
+            value={$duration()}
+            oninput={(e) => {
+              const v = Number(e.currentTarget.value) || 1000;
+              solidMsg.setOptions({
+                duration: v,
+              });
+              setDuration(e.currentTarget.value!);
+            }}
           />
         </form>
       </div>

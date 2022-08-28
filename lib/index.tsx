@@ -25,9 +25,13 @@ const MsgComponent: Component<{
   duration: number;
 }> = (p) => {
   const [getLen, setLen] = createSignal(p.duration);
+  requestAnimationFrame(() => {
+    setLen(getLen() - 500);
+  });
   const t = setInterval(() => {
-    setLen(getLen() - 50);
-  }, 50);
+    const v = getLen() - 500;
+    setLen(v > 0 ? v : 0);
+  }, 500);
   onCleanup(() => {
     clearInterval(t);
   });
@@ -51,7 +55,7 @@ const MsgComponent: Component<{
         {options.progress && (
           <div
             class={[
-              tw`absolute w-full left-0 bottom-0 rounded h-[3px]`,
+              tw`absolute w-full left-0 bottom-0 rounded h-[3px] ease-linear duration-500 transition-transform`,
               options.progresCss[p.type],
             ].join(" ")}
             style={{
