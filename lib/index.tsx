@@ -39,7 +39,7 @@ const MsgComponent: Component<{
     <div
       class={options.css[p.type]}
       classList={{
-        [tw`cursor-pointer`]: options.clickCardClose,
+        [tw`sm:cursor-pointer`]: options.clickCardClose,
         [tw`h-0 max-h-0 opacity-0 mt-0`]: p.removing,
         [tw`mb-4`]: !p.removing,
         [tw`translate-y-12 translate-x-0 opacity-0`]: p.appending,
@@ -64,7 +64,9 @@ const MsgComponent: Component<{
             }}
           />
         )}
-        <p class={tw`flex-1 break-words whitespace-normal overflow-hidden`}>
+        <p
+          class={tw`text-center flex-1 break-words whitespace-normal overflow-hidden`}
+        >
           {p.msg}
         </p>
         {options.closeButton && (
@@ -204,7 +206,7 @@ export function Message() {
       {() => (
         <div
           class={positions[options.position]}
-          style={{ width: options.width, "z-index": options.zIndex }}
+          style={{ "max-width": options.width, "z-index": options.zIndex }}
         >
           <For each={store.list}>
             {(item) => {
