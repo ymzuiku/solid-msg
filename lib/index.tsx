@@ -3,7 +3,7 @@ import {
   createRoot,
   createSignal,
   For,
-  onCleanup,
+  onMount,
   Show,
 } from "solid-js";
 import { createStore } from "solid-js/store";
@@ -15,6 +15,7 @@ const closeSvg = `
 
 type MsgType = "light" | "dark" | "red" | "blue" | "green";
 type PositionType = "top" | "topRight" | "center" | "bottom";
+// aaaaa
 
 const MsgComponent: Component<{
   id: string;
@@ -24,17 +25,13 @@ const MsgComponent: Component<{
   removing?: boolean;
   duration: number;
 }> = (p) => {
-  const [getLen, setLen] = createSignal(p.duration);
-  requestAnimationFrame(() => {
-    setLen(getLen() - 500);
+  const [getLen, setLen] = createSignal(1);
+  onMount(() => {
+    requestAnimationFrame(() => {
+      setLen(0);
+    });
   });
-  const t = setInterval(() => {
-    const v = getLen() - 500;
-    setLen(v > 0 ? v : 0);
-  }, 500);
-  onCleanup(() => {
-    clearInterval(t);
-  });
+
   return (
     <div
       class={options.css[p.type]}
@@ -59,7 +56,8 @@ const MsgComponent: Component<{
             options.progresCss[p.type],
           ].join(" ")}
           style={{
-            transform: `scaleX(${getLen() / p.duration})`,
+            transform: `scaleX(${getLen()})`,
+            "transition-duration": p.duration + "ms",
             "transform-origin": "0% 0%",
           }}
         />
@@ -91,11 +89,11 @@ const options = {
   zIndex: "2000",
   duration: 10000,
   css: {
-    red: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
-    blue: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-indigo-500 dark:bg-black text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
-    green: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-green-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
-    light: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
-    dark: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden w-full inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    red: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    blue: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-indigo-500 dark:bg-black text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    green: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-green-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    light: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
+    dark: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
   },
   progresCss: {
     light: tw`bg-black opacity-20`,
