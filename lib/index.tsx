@@ -14,7 +14,7 @@ const closeSvg = `
 `;
 
 type MsgType = "light" | "dark" | "red" | "blue" | "green";
-type PositionType = "top" | "center" | "bottom";
+type PositionType = "top" | "topRight" | "center" | "bottom";
 
 const MsgComponent: Component<{
   id: string;
@@ -39,6 +39,7 @@ const MsgComponent: Component<{
     <div
       class={options.css[p.type]}
       classList={{
+        [tw`origin-center`]: true,
         [tw`sm:cursor-pointer`]: options.clickCardClose,
         [tw`h-0 max-h-0 opacity-0 mt-0`]: p.removing,
         [tw`mb-4`]: !p.removing,
@@ -51,32 +52,31 @@ const MsgComponent: Component<{
         }
       }}
     >
-      <Show when={!p.removing}>
-        {options.progress && (
-          <div
-            class={[
-              tw`absolute w-full left-0 bottom-0 rounded h-[3px] ease-linear duration-500 transition-transform`,
-              options.progresCss[p.type],
-            ].join(" ")}
-            style={{
-              transform: `scaleX(${getLen() / p.duration})`,
-              "transform-origin": "0% 0%",
-            }}
-          />
-        )}
-        <p
-          class={tw`text-center flex-1 break-words whitespace-normal overflow-hidden`}
-        >
-          {p.msg}
-        </p>
-        {options.closeButton && (
-          <div
-            class={tw`ml-2 w-6 h-6 opacity-70 flex-grow-0 cursor-pointer`}
-            innerHTML={closeSvg}
-            onclick={() => closeItem(p.id)}
-          ></div>
-        )}
-      </Show>
+      {options.progress && (
+        <div
+          class={[
+            tw`absolute w-full left-0 bottom-0 rounded h-[3px] ease-linear duration-500 transition-transform`,
+            options.progresCss[p.type],
+          ].join(" ")}
+          style={{
+            transform: `scaleX(${getLen() / p.duration})`,
+            "transform-origin": "0% 0%",
+          }}
+        />
+      )}
+      <p
+        class={tw`text-center flex-1 break-words whitespace-normal overflow-hidden`}
+        classList={{ [tw`opacity-0`]: p.removing }}
+      >
+        {p.msg}
+      </p>
+      {options.closeButton && (
+        <div
+          class={tw`ml-2 w-6 h-6 opacity-70 flex-grow-0 cursor-pointer`}
+          innerHTML={closeSvg}
+          onclick={() => closeItem(p.id)}
+        ></div>
+      )}
     </div>
   );
 };
@@ -195,9 +195,10 @@ export const solidMsg = {
 };
 
 const positions = {
-  top: tw`fixed mx-auto top-10 left-1/2 -translate-x-1/2`,
-  center: tw`fixed mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
-  bottom: tw`fixed mx-auto bottom-10 left-1/2 -translate-x-1/2`,
+  top: tw`fixed mx-auto top-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center transition-all duration-200 ease-out`,
+  topRight: tw`fixed mx-auto top-10 right-10 flex flex-col items-center justify-center transition-all duration-200 ease-out`,
+  center: tw`fixed mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center  transition-all duration-200 ease-out`,
+  bottom: tw`fixed mx-auto bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center  transition-all duration-200 ease-out`,
 };
 
 export function Message() {

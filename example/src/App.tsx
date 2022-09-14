@@ -52,6 +52,7 @@ const App = () => {
             }}
           >
             <option value="top">position: Top</option>
+            <option value="topRight">position: Top Right</option>
             <option value="center">position: Center</option>
             <option value="bottom">position: Bottom</option>
           </select>
