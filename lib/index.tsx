@@ -8,7 +8,13 @@ import {
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { render } from "solid-js/web";
-import { tw } from "twind";
+import { create } from "twind";
+
+const { tw, setup } = create();
+setup({ preflight: false, hash: (s) => "solid-msg" + s });
+
+export { tw, setup };
+
 const closeSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><path d="M18 6 6 18M6 6l12 12"></path></svg>
 `;
@@ -62,12 +68,12 @@ const MsgComponent: Component<{
           }}
         />
       )}
-      <p
-        class={tw`text-center flex-1 break-words whitespace-normal overflow-hidden`}
+      <div
+        class={tw`font-normal font-sans text-center flex-1 break-words whitespace-normal overflow-hidden`}
         classList={{ [tw`opacity-0`]: p.removing }}
       >
         {p.msg}
-      </p>
+      </div>
       {options.closeButton && (
         <div
           class={tw`ml-2 w-6 h-6 opacity-70 flex-grow-0 cursor-pointer`}
@@ -89,11 +95,11 @@ const options = {
   zIndex: "2000",
   duration: 10000,
   css: {
-    red: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
-    blue: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-indigo-500 dark:bg-black text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
-    green: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-green-500 dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
-    light: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-white dark:bg-black text-base dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
-    dark: tw`relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-black dark:bg-black text-white rounded-lg  flex flex-row items-center justify-center shadow-lg`,
+    red: tw`text-base relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-red-500 dark:bg-red-600 text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    blue: tw`text-base relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-indigo-500 dark:bg-black text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
+    green: tw`text-base relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-green-500 dark:bg-black text-white rounded-lg border-1 flex flex-row items-center justify-center shadow-lg`,
+    light: tw`text-base relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-white dark:bg-black text-black dark:text-white rounded-lg border-1 border-gray-200 flex flex-row items-center justify-center shadow-lg`,
+    dark: tw`text-base relative origin-center transition-all duration-300 ease-out overflow-hidden inline-block bg-black dark:bg-black text-white rounded-lg flex flex-row items-center justify-center shadow-lg`,
   },
   progresCss: {
     light: tw`bg-black opacity-20`,

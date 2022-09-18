@@ -1,5 +1,7 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
-import App from "./App";
-
-render(App, document.body);
+import { setup } from "twind";
+setup({ preflight: false });
+import("./App").then((App) => {
+  render(App.default, document.body);
+});

@@ -10,7 +10,7 @@ import LogoSvg from "./logo.svg";
 const Button: Component<{ onclick?: any; children: JSX.Element }> = (p) => {
   return (
     <button
-      class={tw`bg-red-500 text-white p-2 flex-grow-0 rounded-lg shadow focus:outline-none outline-none`}
+      class={tw`bg-red-500 border-none text-white px-2 py-4 flex-grow-0 rounded-lg shadow focus:outline-none outline-none active:opacity-50 sm:cursor-pointer`}
       onclick={p.onclick}
     >
       {p.children}
@@ -25,7 +25,7 @@ const App = () => {
   const [pos, setPos] = createSignal(solidMsg.options.position);
   return (
     <div
-      class={tw`h-screen w-screen flex flex-col bg-gray-900 overflow-hidden`}
+      class={tw`h-screen w-screen flex flex-col bg-gray-900 overflow-hidden box-border`}
     >
       <div class={tw`flex-1 flex flex-col items-center justify-center`}>
         <Dynamic component={LogoSvg} class={tw`w-60 h-60`} />
@@ -38,10 +38,10 @@ const App = () => {
           <Dynamic component={GithubSvg} />
         </a>
       </div>
-      <div class={tw`px-4 sm:px-20 pb-4 space-y-4 w-full`}>
+      <div class={tw`px-4 sm:px-20 pb-4 space-y-4 w-full box-border`}>
         <div class="w-full flex flex-col sm:flex-row space-y-4 sm:space-x-4 flex-wrap">
           <select
-            class={tw`pb-4 bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
+            class={tw`pb-4 bg-gray-500 border-none bg-opacity-30 text-white rounded p-4 text-white focus:outline-none box-border`}
             value={pos()}
             onChange={(e) => {
               const v = e.currentTarget.value as any;
@@ -57,7 +57,7 @@ const App = () => {
             <option value="bottom">position: Bottom</option>
           </select>
           <select
-            class={tw`bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
+            class={tw`bg-gray-500 border-none bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
             onChange={(e) => {
               const v = e.currentTarget.value as any;
               if (v == "1") {
@@ -77,7 +77,7 @@ const App = () => {
             <option value="2">Close button: show</option>
           </select>
           <select
-            class={tw`bg-gray-500 bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
+            class={tw`bg-gray-500 border-none bg-opacity-30 text-white rounded p-4 text-white focus:outline-none`}
             onChange={(e) => {
               const v = e.currentTarget.value as any;
               if (v == "1") {
@@ -103,13 +103,13 @@ const App = () => {
         >
           <input
             placeholder="Input about message"
-            class={tw`w-full bg-gray-500 bg-opacity-10 p-2 rounded focus:outline-none text-white`}
+            class={tw`border-none box-border w-full bg-gray-500 bg-opacity-10 p-2 rounded focus:outline-none text-white`}
             value={$msg()}
             oninput={(e) => setMsg(e.currentTarget.value)}
           />
           <input
             placeholder="Change all duration"
-            class={tw`mt-4 w-full bg-gray-500 bg-opacity-10 p-2 rounded focus:outline-none text-white`}
+            class={tw`border-none box-border mt-4 w-full bg-gray-500 bg-opacity-10 p-2 rounded focus:outline-none text-white`}
             value={$duration()}
             oninput={(e) => {
               const v = Number(e.currentTarget.value) || 1000;
