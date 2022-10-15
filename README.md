@@ -4,13 +4,13 @@
 
 A solid message UI component.
 
-[View DEMO](https://solid-msg.gewulian.com)
+[View DEMO](https://solid-msg.writeflowy.com)
 
 Features:
 
 - Use [twind](https://github.com/tw-in-js/twind)
 - Progress bar
-- Easy use 
+- Easy use
 - Easy custom
 - Tiny, only `2kb` in gzip
 
@@ -27,10 +27,10 @@ In Solid project:
 ```tsx
 import { solidMsg } from "solid-msg";
 
-solidMsg.light("hello solid-msg")
+solidMsg.light("hello solid-msg");
 
 // change duration
-solidMsg.dark("hello solid-msg", 5000)
+solidMsg.dark("hello solid-msg", 5000);
 ```
 
 # Change options
@@ -39,7 +39,7 @@ solidMsg.dark("hello solid-msg", 5000)
 import { solidMsg } from "solid-msg";
 
 solidMsg.setOptions({
-  positon:"top",
+  positon: "top",
   clickCardClose: true,
   closeButton: false,
   progress: true,
@@ -53,7 +53,7 @@ solidMsg.setOptions({
   progressCss: {
     blue: "custon-blue-progress",
     ...solidMsg.options,
-  }
+  },
 });
 ```
 
@@ -70,7 +70,6 @@ solidMsg.light(
 );
 ```
 
-
 # Custom message card
 
 ```tsx
@@ -80,14 +79,12 @@ solidMsg.setOptions({
   Component: MsgComponent,
 });
 
-
 const MsgComponent: Component<{
   id: string;
   msg: any;
   type: MsgType;
   duration: number;
 }> = (p) => {
-
   return (
     <div>
       <div>Your custom message card</div>
@@ -95,6 +92,4 @@ const MsgComponent: Component<{
     </div>
   );
 };
-
 ```
-

@@ -1,6 +1,6 @@
 {
   "name": "solid-msg",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "solid msg UI component",
   "main": "cjs/index.js",
   "types": "lib/index.tsx",
@@ -39,3 +39,4 @@
   },
   "homepage": "git+https://github.com/ymzuiku/solid-msg.git"
 }
+
