@@ -1,22 +1,28 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@twind/core': ^1.0.1
+  '@twind/preset-autoprefix': ^1.0.1
+  '@twind/preset-tailwind': ^1.0.1
+  '@types/node': ^18.11.9
   '@vitejs/plugin-legacy': ^2.0.1
   esbuild-plugin-solid: ^0.4.2
   solid-js: ^1.5.1
   tailwindcss: ^3.1.8
   terser: ^5.15.0
-  twind: ^0.16.17
   typescript: ^4.7.4
   vite: ^3.0.9
   vite-plugin-solid: ^2.3.0
   vite-plugin-solid-svg: ^0.4.1
 
 dependencies:
+  '@twind/core': 1.0.1_typescript@4.8.2
+  '@twind/preset-autoprefix': 1.0.1_sop4ew3z2ybiu7tzxla6zpaxu4
+  '@twind/preset-tailwind': 1.0.1_sop4ew3z2ybiu7tzxla6zpaxu4
   solid-js: 1.5.1
-  twind: 0.16.17_typescript@4.8.2
 
 devDependencies:
+  '@types/node': 18.11.9
   '@vitejs/plugin-legacy': 2.0.1_terser@5.15.0+vite@3.0.9
   esbuild-plugin-solid: 0.4.2_solid-js@1.5.1
   tailwindcss: 3.1.8
@@ -421,9 +427,63 @@ packages:
       fastq: 1.13.0
     dev: true
 
+  /@swc/helpers/0.4.14:
+    resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
+    dependencies:
+      tslib: 2.4.1
+    dev: false
+
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
+    dev: true
+
+  /@twind/core/1.0.1_typescript@4.8.2:
+    resolution: {integrity: sha512-cSiDmTqSZ3HYqhbUhb9r//EiYvdfzteU9qbIPeBCIUkNg3ZUol4vOYNxBH5ymmderF4pvQ+Btf6d+flpVm0U9g==}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      typescript: ^4.8.4
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@swc/helpers': 0.4.14
+      csstype: 3.1.1
+      typescript: 4.8.2
+    dev: false
+
+  /@twind/preset-autoprefix/1.0.1_sop4ew3z2ybiu7tzxla6zpaxu4:
+    resolution: {integrity: sha512-UL/09ZjK+lw07i12czrQZgQTznNnfsLZXlRjfxx9Tl76O7uv2Z41Ws2jl6/ONbwbtcC9t+xslZWm/i4KbfaD+w==}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      '@twind/core': ^1.0.1
+      typescript: ^4.8.4
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@twind/core': 1.0.1_typescript@4.8.2
+      style-vendorizer: 2.2.3
+      typescript: 4.8.2
+    dev: false
+
+  /@twind/preset-tailwind/1.0.1_sop4ew3z2ybiu7tzxla6zpaxu4:
+    resolution: {integrity: sha512-anUOpxjvKFvxi4jP3u0HgP1+GtnqMFR7bZOUUc8+M099zIyLaRtBWw/8CCn+QN1WY/eZ01e7ru8GlYPUpJEQxA==}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      '@twind/core': ^1.0.1
+      typescript: ^4.8.4
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@swc/helpers': 0.4.14
+      '@twind/core': 1.0.1_typescript@4.8.2
+      typescript: 4.8.2
+    dev: false
+
+  /@types/node/18.11.9:
+    resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
     dev: true
 
   /@vitejs/plugin-legacy/2.0.1_terser@5.15.0+vite@3.0.9:
@@ -644,6 +704,10 @@ packages:
   /csstype/3.1.0:
     resolution: {integrity: sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==}
 
+  /csstype/3.1.1:
+    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+    dev: false
+
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -684,15 +748,18 @@ packages:
       domelementtype: 2.3.0
       domhandler: 4.3.1
       entities: 2.2.0
+    dev: true
 
   /domelementtype/2.3.0:
     resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
+    dev: true
 
   /domhandler/4.3.1:
     resolution: {integrity: sha512-GrwoxYN+uWlzO8uhUXRl0P+kHE4GtVPfYzVLcUxPL7KNdHKj66vvlhiweIHqYYXWlw+T8iLMp42Lm67ghw4WMQ==}
     engines: {node: '>= 4'}
     dependencies:
       domelementtype: 2.3.0
+    dev: true
 
   /domutils/2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
@@ -700,6 +767,7 @@ packages:
       dom-serializer: 1.4.1
       domelementtype: 2.3.0
       domhandler: 4.3.1
+    dev: true
 
   /electron-to-chromium/1.4.233:
     resolution: {integrity: sha512-ejwIKXTg1wqbmkcRJh9Ur3hFGHFDZDw1POzdsVrB2WZjgRuRMHIQQKNpe64N/qh3ZtH2otEoRoS+s6arAAuAAw==}
@@ -707,6 +775,7 @@ packages:
 
   /entities/2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
+    dev: true
 
   /esbuild-android-64/0.14.54:
     resolution: {integrity: sha512-Tz2++Aqqz0rJ7kYBfz+iqyE3QMycD4vk7LBRyWaAVFgFtQ/O8EJOnVmTOiDWYZ/uYzB4kvP+bqejYdVKzE5lAQ==}
@@ -1016,15 +1085,6 @@ packages:
   /html-entities/2.3.2:
     resolution: {integrity: sha512-c3Ab/url5ksaT0WyleslpBEthOzWhrjQbg75y7XUsfSzi3Dgzt0l8w5e7DylRn15MTlMMD58dTfzddNS2kcAjQ==}
     dev: true
-
-  /htmlparser2/6.1.0:
-    resolution: {integrity: sha512-gyyPk6rgonLFEDGoeRgQNaEUvdJ4ktTmmUh/h2t7s+M8oPpIPxgNACWa+6ESR57kXstwqPiCut0V8NRpcwgU7A==}
-    dependencies:
-      domelementtype: 2.3.0
-      domhandler: 4.3.1
-      domutils: 2.8.0
-      entities: 2.2.0
-    dev: false
 
   /is-binary-path/2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
@@ -1433,19 +1493,8 @@ packages:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
     dev: true
 
-  /twind/0.16.17_typescript@4.8.2:
-    resolution: {integrity: sha512-dBKm8+ncJcIALiqBRLxA/krFEwUSjnzR+N73eKgqPtVPJqfLpkajWwKWL5xEpEQ5ypS3ffa0jJjH3/eIeuA3pw==}
-    engines: {node: '>=10.13'}
-    peerDependencies:
-      typescript: ^4.1.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      csstype: 3.1.0
-      htmlparser2: 6.1.0
-      style-vendorizer: 2.2.3
-      typescript: 4.8.2
+  /tslib/2.4.1:
+    resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
     dev: false
 
   /typescript/4.8.2:
