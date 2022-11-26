@@ -15,7 +15,7 @@ var x=Object.defineProperty;var B=Object.getOwnPropertyDescriptor;var T=Object.g
   --solid-msg-dark-bg: #000;
   --solid-msg-dark-deep: rgb(103, 103, 103);
   --solid-msg-radius: 8px;
-  --solid-msg-shadow: 0px 4px 6px rgba(255, 0, 0, 0.58);
+  --solid-msg-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .solid-msg {
